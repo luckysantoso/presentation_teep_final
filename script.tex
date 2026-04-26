@@ -377,16 +377,18 @@ Layer numbers spoken briskly. ``Decoder reconstructs only the current frame'' �
 
 \say{And here is what ``five possible futures'' actually looks like.}
 \beat
-\say{Left: the seed observation reconstructed by the VAE. Right: \textbf{five frames, one decoded from each Gaussian component} — k = 1 through 5. Below each, the mixture weight $\pi_k$ with a small bar.}
+\say{The seed is from a bot in the \emphw{middle of the warehouse — away from the pick and replenishment stations} — so we are looking at genuine corridor dynamics. Left: the seed observation reconstructed by the VAE. Right: \textbf{five 7-step dream rollouts, each one pinned to a different Gaussian mode} — k = 1 through 5. Below each, the mixture weight $\pi_k$ with a small bar.}
 
-\stage{point along the bars}
+\stage{point along the panels}
 
-\say{For this seed, the weights are \textbf{0.05, 0.21, 0.03, 0.54, and 0.17} — three components carry meaningful probability mass. The model is genuinely uncertain, and the five panels visualise that uncertainty.}
+\say{For this seed, the weights are \textbf{0.05, 0.23, 0.35, 0.29, and 0.08} — four components carry meaningful probability mass.}
 \beat
-\say{\emphw{One seed} $\rightarrow$ five imagined next-latents, each weighted by $\pi_k$. CMA-ES averages these in dream rollouts to score policies — \textbf{no real environment touched}.}
+\say{After seven dream steps, the modes diverge into \emphw{visibly different scenes}: k = 1 drifts forward; k = 2 stays under a pod; \textbf{k = 3 collapses into a different aisle perspective}; k = 4 keeps the overhead pod; k = 5 is a slight variant.}
+\beat
+\say{\emphw{One seed} $\rightarrow$ five imagined trajectories, each weighted by $\pi_k$. This is what genuine multimodal dynamics looks like — the model is not just adding noise to a single mean, it is predicting \textbf{structurally different futures}. CMA-ES averages over these in dream rollouts to score policies — \textbf{no real environment touched}.}
 
 \begin{stagebox}
-The five-futures figure is the focal point — use it. ``Five possible futures, weighted'' — quotable, pause around it. $\rightarrow$ Slide 10.
+The five-futures figure is the focal point — use it. ``Five possible futures, weighted'' — quotable, pause around it. The 7-step horizon is what makes the modal divergence visible — at 1 step the warehouse barely changes. $\rightarrow$ Slide 10.
 \end{stagebox}
 \end{slide}
 
