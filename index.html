@@ -2842,39 +2842,51 @@ table.lab tr.row-accent td {
             <h2 class="title reveal">Dataset — <em>640,000 transitions</em> from a real-fidelity simulator.</h2>
         </div>
 
-        <div class="cols-3 reveal stagger" style="margin-bottom:clamp(0.6rem,1.2vw,1rem);">
-            <div class="stat-tile">
-                <div class="stat-num">100</div>
-                <div class="stat-label">Episodes</div>
-                <div class="stat-sub">jenkinsinstance1 · varied seeds</div>
+        <!-- Split: data-collection visualisation (left) + stat grid (right) -->
+        <div class="reveal stagger" style="display:grid;
+                                            grid-template-columns:1.05fr 1fr;
+                                            gap:clamp(0.7rem,1.6vw,1.4rem);
+                                            margin-bottom:clamp(0.6rem,1.2vw,1rem);
+                                            align-items:stretch;">
+            <!-- Live visualisation of one bot's collected data (validation export) -->
+            <div class="media-frame" style="padding:0.4rem;">
+                <span class="media-label">Bot 0 · validation rollout · 1000 s sim</span>
+                <img src="assets/bot0_validation.gif"
+                     alt="Animated visualisation of bot 0's trajectory and observations during data collection"
+                     style="max-height:min(36vh,330px); width:100%; object-fit:contain;" />
             </div>
-            <div class="stat-tile">
-                <div class="stat-num">32</div>
-                <div class="stat-label">Bots / episode</div>
-                <div class="stat-sub">consistent fleet size</div>
-            </div>
-            <div class="stat-tile">
-                <div class="stat-num">1 000</div>
-                <div class="stat-label">Steps / episode</div>
-                <div class="stat-sub">~12 min sim time each</div>
-            </div>
-        </div>
-
-        <div class="cols-3 reveal" style="margin-bottom:clamp(0.6rem,1.2vw,1rem);">
-            <div class="stat-tile">
-                <div class="stat-num" style="font-size:clamp(1.2rem,2.4vw,1.9rem);">640&nbsp;K</div>
-                <div class="stat-label">Total transitions</div>
-                <div class="stat-sub">obs + action + reward</div>
-            </div>
-            <div class="stat-tile">
-                <div class="stat-num" style="font-size:clamp(1.2rem,2.4vw,1.9rem);">96 × 96</div>
-                <div class="stat-label">RGB · uint8</div>
-                <div class="stat-sub">per-bot camera frame</div>
-            </div>
-            <div class="stat-tile">
-                <div class="stat-num" style="font-size:clamp(1.2rem,2.4vw,1.9rem);">[−3, +2]</div>
-                <div class="stat-label">Reward range</div>
-                <div class="stat-sub">mean ≈ 0.003 (sparse)</div>
+            <!-- 6-tile stat grid -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(0.4rem,0.9vw,0.7rem);">
+                <div class="stat-tile">
+                    <div class="stat-num">100</div>
+                    <div class="stat-label">Episodes</div>
+                    <div class="stat-sub">jenkinsinstance1 · varied seeds</div>
+                </div>
+                <div class="stat-tile">
+                    <div class="stat-num">32</div>
+                    <div class="stat-label">Bots / episode</div>
+                    <div class="stat-sub">consistent fleet size</div>
+                </div>
+                <div class="stat-tile">
+                    <div class="stat-num">1 000</div>
+                    <div class="stat-label">Steps / episode</div>
+                    <div class="stat-sub">~12 min sim time</div>
+                </div>
+                <div class="stat-tile">
+                    <div class="stat-num" style="font-size:clamp(1.2rem,2.4vw,1.9rem);">640&nbsp;K</div>
+                    <div class="stat-label">Total transitions</div>
+                    <div class="stat-sub">obs + action + reward</div>
+                </div>
+                <div class="stat-tile">
+                    <div class="stat-num" style="font-size:clamp(1.2rem,2.4vw,1.9rem);">96 × 96</div>
+                    <div class="stat-label">RGB · uint8</div>
+                    <div class="stat-sub">per-bot camera frame</div>
+                </div>
+                <div class="stat-tile">
+                    <div class="stat-num" style="font-size:clamp(1.2rem,2.4vw,1.9rem);">[−3, +2]</div>
+                    <div class="stat-label">Reward range</div>
+                    <div class="stat-sub">mean ≈ 0.003 (sparse)</div>
+                </div>
             </div>
         </div>
 

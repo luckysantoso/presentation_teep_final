@@ -1,0 +1,798 @@
+% =====================================================================
+%  Presentation Script — Decentralized RMFS Control with World Models
+%  TEEP Progress Update · NTUST · CITI Lab
+%
+%  Compile with:  pdflatex script.tex
+%  Self-contained — uses only standard LaTeX packages.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+\usepackage{hyperref}
+
+% --------- THEME COLOURS (mirror the deck) ----------------------------
+\definecolor{thBg}{HTML}{0B0E16}
+\definecolor{thAmber}{HTML}{F4A261}
+\definecolor{thTeal}{HTML}{4FD1C5}
+\definecolor{thViolet}{HTML}{9B8DC4}
+\definecolor{thCoral}{HTML}{E76F51}
+\definecolor{thMuted}{HTML}{5A6273}
+\definecolor{thInk}{HTML}{1A1F2A}
+\definecolor{thText}{HTML}{222831}
+\definecolor{thStrong}{HTML}{0E1320}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=thAmber,
+    urlcolor=thTeal,
+    pdftitle={Presentation Script — World Models for RMFS},
+    pdfauthor={NTUST CITI Lab},
+}
+
+% --------- HEADER / FOOTER --------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{\small\color{thMuted}\textsc{World Models for RMFS · Speaking Script}}
+\fancyhead[R]{\small\color{thMuted}\textsc{NTUST · CITI Lab · 2026}}
+\fancyfoot[C]{\small\color{thMuted}\thepage}
+
+% --------- SECTION FORMATTING -----------------------------------------
+\titleformat{\section}
+    {\Large\bfseries\color{thStrong}}
+    {\textcolor{thAmber}{§\thesection}}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.2em}{0.6em}
+
+\titleformat{\subsection}[hang]
+    {\large\bfseries\color{thStrong}}
+    {\textcolor{thAmber}{\thesubsection}}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.4em}
+
+% --------- SLIDE BLOCK ENVIRONMENT ------------------------------------
+% Usage:  \begin{slide}{Slide 04 · 23}{What Is a World Model?}{4:30 – 6:00 · 1.5 min}{Goal text}
+%           ... script content ...
+%         \end{slide}
+\newtcolorbox{slide}[4]{
+    breakable,
+    enhanced,
+    colback=white,
+    colframe=thAmber,
+    boxrule=0pt,
+    leftrule=2pt,
+    arc=2pt,
+    left=10pt, right=10pt, top=10pt, bottom=10pt,
+    before skip=14pt, after skip=10pt,
+    title=\textbf{\textcolor{thStrong}{#1}\hfill\small\textcolor{thMuted}{\textsc{#3}}}\\[2pt]
+        \large\textcolor{thStrong}{\itshape #2}\\[2pt]
+        \small\textcolor{thMuted}{\textbf{Goal:} #4},
+    coltitle=thStrong,
+    fonttitle=\normalsize,
+    colbacktitle=white,
+    titlerule=0.4pt,
+}
+
+% --------- SAY / STAGE / EMPHASIS HELPERS -----------------------------
+\newcommand{\say}[1]{%
+    \par\vspace{0.3em}%
+    \begingroup
+    \leftskip=12pt
+    \rightskip=8pt
+    \color{thStrong}%
+    \itshape\textbf{“#1”}%
+    \par
+    \endgroup
+    \vspace{0.2em}
+}
+
+\newcommand{\beat}[1][2]{%
+    \par\textcolor{thMuted}{\small\textit{(pause #1\,s)}}\par
+    \vspace{0.2em}
+}
+
+\newcommand{\stage}[1]{%
+    \par\textcolor{thMuted}{\small\textit{[#1]}}\par
+    \vspace{0.2em}
+}
+
+\newcommand{\emphw}[1]{\textbf{\textcolor{thAmber}{#1}}}
+\newcommand{\emphteal}[1]{\textbf{\textcolor{thTeal}{#1}}}
+\newcommand{\emphcoral}[1]{\textbf{\textcolor{thCoral}{#1}}}
+\newcommand{\emphviolet}[1]{\textbf{\textcolor{thViolet}{#1}}}
+
+% Quote box (used for Ha & Schmidhuber etc.)
+\newtcolorbox{quoteblock}{
+    enhanced, colback=white, colframe=thTeal,
+    boxrule=0pt, leftrule=2pt, arc=2pt,
+    left=10pt, right=10pt, top=6pt, bottom=6pt,
+    before skip=6pt, after skip=6pt,
+}
+
+% Stage-direction footer block
+\newtcolorbox{stagebox}{
+    enhanced, colback=thInk, colframe=thInk, coltext=white,
+    boxrule=0pt, arc=2pt,
+    left=10pt, right=10pt, top=6pt, bottom=6pt,
+    before skip=6pt, after skip=10pt,
+    fontupper=\small,
+}
+
+% --------- DOCUMENT ---------------------------------------------------
+\begin{document}
+
+% =====================================================================
+%  TITLE PAGE
+% =====================================================================
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+\textcolor{thMuted}{\textsc{\large NTUST · CITI Lab · TEEP Progress Update · 2026}}\\[2.5cm]
+{\Huge\bfseries\color{thStrong} Speaking Script}\\[0.6cm]
+{\Large\itshape\color{thAmber} Decentralized Robot Mobile Fulfillment\\
+       System Control with World Models}\\[2.5cm]
+
+\begin{tabular}{rl}
+\textcolor{thMuted}{Audience}      & Advisor — research progress update \\[3pt]
+\textcolor{thMuted}{Total length}  & 28 min talk + 5 min Q\&A \\[3pt]
+\textcolor{thMuted}{Language}      & English \\[3pt]
+\textcolor{thMuted}{Slide count}   & 24 main slides (1 title + 23 numbered) \\[3pt]
+\textcolor{thMuted}{Style}         & Confident · honest · narrative-driven \\
+\end{tabular}
+
+\vfill
+\textcolor{thMuted}{\small Notation: \emph{italic} = stage direction \quad
+                          \textbf{bold} = vocal emphasis \quad
+                          \emph{(pause N\,s)} = N-second pause \quad
+                          $\rightarrow$ = transition cue}
+\end{titlepage}
+
+% =====================================================================
+%  SECTION 1 — HOOK & BACKGROUND  (5 min, cumulative 0:00 – 5:00)
+% =====================================================================
+\section{Hook \& Background \hfill \textcolor{thMuted}{\small 5 min · 0:00 – 5:00}}
+
+% ---- TITLE SLIDE ----------------------------------------------------
+\begin{slide}{Title slide}{Decentralized RMFS with World Models}{0:00 – 0:30 · 30 sec}{Visual hook. The dream rollout is already looping. Establish identity and title.}
+\stage{The ground-truth-vs-dream GIF is already looping behind the title before you begin. Stand silent for 3 seconds.}
+
+\say{Good afternoon, Professor.}
+\beat[1]
+\say{What you see behind me is \textbf{not a simulator recording}.}
+\beat
+\say{It is the \emphw{imagination of a robot} — a model dreaming the future of a warehouse, frame by frame, \textbf{without ever running the real simulator}.}
+\beat
+\say{The title: \textbf{Decentralized Robot Mobile Fulfillment System Control with World Models}. I am [Name], advised by Prof.\ Shou Yan Chou. NTUST · CITI Lab. This is my research progress update.}
+
+\begin{stagebox}
+Don't point at the GIF — let it play behind you. Eye contact on
+``the imagination of a robot.'' $\rightarrow$ Click into Slide 01 confidently.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 01 ------------------------------------------------------
+\begin{slide}{Slide 01 · 23}{Why Centralized RMFS is Fragile}{0:30 – 2:00 · 1.5 min}{Identify the enemy — centralized control. Set up the tension that resolves on Slide 03.}
+\say{Modern RMFS — Amazon Robotics, Geek+ — runs on \textbf{centralized control}. A single central planner — typically a MAPF solver like CBS, BCP, or A\textsuperscript{*} — computes paths for the entire fleet simultaneously.}
+
+\stage{point at the diagram on the left — central node with radiating links and the warning indicator}
+
+\say{Three properties of this architecture. \textbf{One}, a single computer dictates the path of every robot. \textbf{Two}, continuous communication is required — TCP backbone, no graceful degradation. \textbf{Three}, compute grows combinatorially with fleet size — coordination is the bottleneck.}
+\beat
+\say{Elegant in theory. \textbf{But the entire operation lives or dies with one process.}}
+
+\begin{stagebox}
+The diagram has a pulsing red warning indicator at the centre — let it speak. ``Lives or dies with one process'' — slow, deliberate. Set up the next slide.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 02 ------------------------------------------------------
+\begin{slide}{Slide 02 · 23}{Failure Modes}{2:00 – 3:30 · 1.5 min}{Make the fragility concrete. Three icon cards plus an impact table.}
+\say{Three failure modes, one shared consequence.}
+
+\stage{point at the three cards across the top}
+
+\say{\emphcoral{Mode 1 — Central Server Crash.} A single OS-level failure halts the planner. Every robot freezes mid-path. There is no fallback.}
+
+\say{\emphcoral{Mode 2 — Network Partition.} TCP or wireless dropout strands robots without new paths. They either stop or run a stale plan into a wall.}
+
+\say{\emphcoral{Mode 3 — Robot Sensor Fault.} A single bot reporting an unknown state triggers full-fleet replanning — combinatorial cost.}
+
+\stage{point at the table below}
+
+\say{The operational impact: server crash equals \textbf{100\% downtime}. Network partition equals \textbf{local zone halt}. A single robot failure pauses \textbf{everyone}. A picker delay cascades into \textbf{throughput drop}.}
+\beat
+\say{Every component capable of breaking becomes a vector for \textbf{system-wide stoppage}.}
+
+\begin{stagebox}
+Three cards spoken with rhythm. The table is read briskly — the advisor doesn't need every word. $\rightarrow$ Build into Slide 03.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 03 ------------------------------------------------------
+\begin{slide}{Slide 03 · 23}{Decentralized Vision}{3:30 – 4:30 · 1 min}{Resolve the tension. State the three thesis properties.}
+\say{What if \textbf{each robot could decide on its own?}}
+
+\stage{point at the diagram on the left — eight robots each with a $\pi$ brain badge}
+
+\say{Same warehouse, but \textbf{no central server}. Each robot owns a local policy. One robot fails — the rest \textbf{keep operating}. The challenge: how does a robot make smart decisions without seeing the whole map?}
+\beat
+\say{The traditional answer is rule-based. The modern answer — what I am working on — is a \emphw{world model}: the robot learns from its visual observations and can imagine its future.}
+
+\stage{point at the three property cards on the right}
+
+\say{Three properties this work commits to. \textbf{One — Decentralized}: no central planner, each robot decides on board. \textbf{Two — Vision-only}: pixels in, action out, no coordinates. \textbf{Three — Imagination-trained}: the controller never touches the real environment during training.}
+
+\begin{stagebox}
+``Brain on board'' while pointing at one of the bots. Three properties spoken slowly — counting on fingers helps. $\rightarrow$ ``And to understand how this is possible, we first need to define what a world model is.''
+\end{stagebox}
+\end{slide}
+
+% =====================================================================
+%  SECTION 2 — WORLD MODELS · DEFINITION  (4 min, cumulative 5:00 – 9:00)
+% =====================================================================
+\section{World Models · Definition \hfill \textcolor{thMuted}{\small 4 min · 5:00 – 9:00}}
+
+% ---- SLIDE 04 ------------------------------------------------------
+\begin{slide}{Slide 04 · 23}{What Is a World Model?}{4:30 – 6:00 · 1.5 min}{Definition. Use the architecture diagram at the top to anchor the explanation.}
+\say{World models — popularised by \textbf{David Ha and Jürgen Schmidhuber, 2018}. The architecture diagram at the top of this slide is from their paper, redrawn for our setting.}
+
+\stage{point through the diagram}
+
+\say{Environment at the top. Observation on the left. The world model in the dashed box containing the \emphw{VAE bowtie} and the \emphviolet{MDN-RNN box}. The \emphteal{controller wedge} on the right. Arrows in amber for latent z, violet for hidden state h, coral for action. The animated tokens that ride along the arrows show the dataflow. We will open up V, M, and C one slide at a time.}
+
+\stage{point at the equation}
+
+\say{Formally: \textbf{p of z-t-plus-1 given z-t, a-t, h-t}. Given the current latent state, the action taken, and the hidden history, the model predicts the next latent state.}
+
+\begin{quoteblock}
+\textit{``Agents can use the world model to plan a sequence of actions in their dreams.''}\\[2pt]
+\hfill — Ha \& Schmidhuber, 2018.
+\end{quoteblock}
+
+\stage{point at the bullets}
+
+\say{Three properties. Trained from \textbf{observation data alone} — no physics engine. Can be \textbf{rolled out forward} to imagine futures with no simulator in the loop. And the policy can be trained in \emphteal{dreams} instead of reality — cheap, parallel, safe.}
+
+\begin{stagebox}
+Walk through the diagram before reading the equation — visual first. Read the quote slowly. $\rightarrow$ ``Now let's open the world model into its three components.''
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 05 ------------------------------------------------------
+\begin{slide}{Slide 05 · 23}{V · M · C}{6:00 – 7:30 · 1.5 min}{Roadmap for the rest of the talk. Three panels with mini-architecture diagrams.}
+\say{Three components, following an analogy with human cognition.}
+
+\stage{point at the V panel}
+
+\say{\emphw{V — Vision.} Compress pixels to latent. The mini-diagram shows it: a 96$\times$96 RGB input image goes into the \textbf{VAE bowtie} — encoder narrows to a 64-dimensional latent z, decoder mirrors back to a reconstructed image. Implementation: \textbf{Variational Autoencoder}.}
+
+\stage{point at the M panel}
+
+\say{\emphviolet{M — Imagination.} Predict the next latent and the reward. The diagram: the triple (z, a, h) enters the \textbf{MDN-RNN box}, output is $\hat{z}'$ and $\hat{r}$. The recurrent loop on top is the LSTM hidden state being fed back. Implementation: \textbf{MDN-RNN with a 5-component Gaussian mixture head plus a reward head}.}
+
+\stage{point at the C panel}
+
+\say{\emphteal{C — Decision.} A tiny linear policy. The diagram: the violet arrow [z $\oplus$ h] enters the \textbf{C wedge}, the coral arrow a exits to the right. \textbf{One matrix plus a bias — 320 inputs to 11 outputs — 3{,}531 parameters.}}
+
+\beat
+\say{The key insight: V and M are trained from offline data. \emphw{C is trained inside dream rollouts of V and M} — it never touches the real simulator. This is why the world-model approach is so sample-efficient.}
+
+\begin{stagebox}
+Use the three mini-diagrams as visual anchors — point directly at each. Pause between V, M, and C. ``3,531 parameters'' — second mention. Plant it. $\rightarrow$ Slide 06.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 06 ------------------------------------------------------
+\begin{slide}{Slide 06 · 23}{Lineage · Two Tracks}{7:30 – 8:30 · 1 min}{Position the work within state of the art. Two parallel timelines: amber Pixel-Reconstruction track and teal JEPA track. Bottom strip has three panels.}
+\say{World-model research has split into \textbf{two parallel lineages}.}
+
+\stage{point at the top track}
+
+\say{\emphw{Track A — Pixel Reconstruction.} \textbf{2018}: Ha and Schmidhuber — the highlighted anchor, our baseline. \textbf{2019–22}: the Dreamer family — RSSM, gradient actor, master 150 tasks. \textbf{2022}: DayDreamer and Plan2Explore — real robots and curiosity in dream space. \textbf{2024}: IRIS and TWM — transformer dynamics with discrete tokens. \textbf{2024–25}: Sora and DeepMind's Genie 3 — generative world simulators, real-time interactive. \textbf{2026}: NVIDIA Cosmos — Predict 2, Reason 2, Cosmos Policy, Alpamayo — world foundation models in production.}
+
+\stage{point at the bottom track}
+
+\say{\emphteal{Track B — Embedding Prediction · JEPA.} \textbf{2022}: LeCun's JEPA position paper — predict in embedding space, not pixels. \textbf{2023}: I-JEPA — image self-supervised. \textbf{2024}: V-JEPA — Meta's video version, two million unlabelled videos. \textbf{2025}: V-JEPA 2 with the action-conditioned variant deployed zero-shot on Franka arms. \textbf{2026}: LeJEPA — the theoretical foundation.}
+
+\stage{point at the bottom strip}
+
+\say{Why H\&S 2018 as the base? \emphw{Smallest controller} — 3,531 parameters. \emphw{CMA-ES} is gradient-free, handles discrete actions cleanly. \emphteal{JEPA is the orthogonal axis} I want to explore later. The H\&S adaptations specific to my work — frame stacking, override-aware action, sparse warehouse reward — are listed on the right.}
+
+\begin{stagebox}
+Read each timeline briskly — don't dwell on any single node. ``JEPA is the orthogonal axis'' — set up future work. $\rightarrow$ Slide 07.
+\end{stagebox}
+\end{slide}
+
+% =====================================================================
+%  SECTION 3 — METHODOLOGY  (5 min, cumulative 9:00 – 14:00)
+% =====================================================================
+\section{Methodology \hfill \textcolor{thMuted}{\small 5 min · 9:00 – 14:00}}
+
+% ---- SLIDE 07 ------------------------------------------------------
+\begin{slide}{Slide 07 · 23}{Methodology Overview}{8:30 – 9:30 · 1 min}{Pipeline as a flow plus four adaptations against H\&S.}
+\say{Pipeline follows H\&S, with \textbf{specific adaptations for RMFS}.}
+
+\stage{point at the five-step flow at the top}
+
+\say{Five steps: \textbf{RMFS data $\rightarrow$ V offline $\rightarrow$ M offline $\rightarrow$ C via CMA-ES in dreams $\rightarrow$ per-robot deployment}. Roughly 1 millisecond per decision.}
+
+\stage{point at the adaptations table below}
+
+\say{Four adaptations against H\&S 2018. \textbf{Environment}: VizDoom 64$\times$64 $\rightarrow$ \emphw{RMFS warehouse 96$\times$96}. \textbf{Frame stacking}: single frame $\rightarrow$ \emphw{2-frame stack for motion cueing}. \textbf{Action space}: 3 discrete $\rightarrow$ \emphw{11-dim} with override, direction, accel and decel. \textbf{Reward}: continuous game score $\rightarrow$ \emphw{sparse warehouse reward} — throughput minus collisions.}
+
+\begin{stagebox}
+The flow + table speak for themselves. Read briskly. $\rightarrow$ Slide 08.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 08 ------------------------------------------------------
+\begin{slide}{Slide 08 · 23}{V · VAE Visual Encoder}{9:30 – 11:00 · 1.5 min}{Explain V. The reconstruction at training epoch 99 is on the right.}
+\say{First component, V — the VAE encoder.}
+
+\stage{point at the architecture on the left}
+
+\say{Input is 96$\times$96$\times$6 — that's the 2-frame stack. Four convolutional layers, each stride 2: 96 $\rightarrow$ 47 $\rightarrow$ 22 $\rightarrow$ 10 $\rightarrow$ 4. Then fully connected to $\mu$ and $\log\sigma$, each 64-dimensional. The decoder mirrors back.}
+\beat
+\say{\emphw{Important design choice}: the decoder reconstructs only the \textbf{3-channel current frame}, not the full 6-channel stack. We want z to encode \emph{current} state; history is M's job.}
+
+\stage{point at the reconstruction on the right}
+
+\say{On the right, the \emphw{actual reconstruction at training epoch 99} — straight from the checkpoint. Loss: MSE plus $\beta \cdot$KL with $\beta = 1.0$. Training time about 2 hours on a consumer GPU.}
+
+\stage{point at the pills below}
+
+\say{The compression: 96$^2$ $\times$ 6 channels $\rightarrow$ 64-d z. Roughly \textbf{1{,}300$\times$ compression}.}
+
+\begin{stagebox}
+Layer numbers spoken briskly. ``Decoder reconstructs only the current frame'' — slow, this is non-trivial. $\rightarrow$ Slide 09.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 09 ------------------------------------------------------
+\begin{slide}{Slide 09 · 23}{M · MDN-RNN Dynamics}{11:00 – 12:30 · 1.5 min}{Explain M. Use the GMM five-futures visualization at the bottom.}
+\say{Second component, M — the MDN-RNN.}
+
+\stage{point at the architecture on the left}
+
+\say{Input 75-dimensional: 64-d z plus 11-d action. LSTM hidden 256. Output 646 dimensions, factored into $\mu_k$, $\sigma_k$, $\pi_k$ for k = 1..5, plus the \emphw{reward head} $\hat{r}$.}
+
+\stage{point at the equation panel on the right}
+
+\say{\textbf{p of z-t-plus-1 given z-t, a-t, h-t equals the sum over k of $\pi_k$ times Gaussian $\mu_k$ $\sigma_k^2$.} Plain English: \emphw{five possible futures, weighted}.}
+
+\stage{point at the bullets on the right}
+
+\say{Why a GMM? Because warehouse dynamics are \textbf{multimodal} — at a junction, the bot might go left or right; a single Gaussian would average between them. The LSTM hidden state $h_t$ handles partial observability. And the \emphw{reward head} $\hat{r}$ — that is what CMA-ES will use as fitness in dreams.}
+
+\stage{point at the visualization at the bottom — full-width media frame}
+
+\say{And here is what ``five possible futures'' actually looks like.}
+\beat
+\say{Left: the seed observation reconstructed by the VAE. Right: \textbf{five frames, one decoded from each Gaussian component} — k = 1 through 5. Below each, the mixture weight $\pi_k$ with a small bar.}
+
+\stage{point along the bars}
+
+\say{For this seed, the weights are \textbf{0.05, 0.21, 0.03, 0.54, and 0.17} — three components carry meaningful probability mass. The model is genuinely uncertain, and the five panels visualise that uncertainty.}
+\beat
+\say{\emphw{One seed} $\rightarrow$ five imagined next-latents, each weighted by $\pi_k$. CMA-ES averages these in dream rollouts to score policies — \textbf{no real environment touched}.}
+
+\begin{stagebox}
+The five-futures figure is the focal point — use it. ``Five possible futures, weighted'' — quotable, pause around it. $\rightarrow$ Slide 10.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 10 ------------------------------------------------------
+\begin{slide}{Slide 10 · 23}{C · Controller + CMA-ES}{12:30 – 13:30 · 1 min}{Reveal the 3,531 parameters for the third time, with the fast-policy GIF on the right.}
+\say{Third component, C — the controller. And this is where the 3{,}531-parameter story closes.}
+
+\stage{point at the architecture on the left}
+
+\say{Pure linear: input is concat(z, h) — 320 dimensions. Output 11 dimensions: override, direction, accel, decel. \emphw{W matrix 320$\times$11 plus bias 11 = 3{,}531 parameters total.} No hidden layer.}
+
+\stage{point at the CMA-ES Training panel}
+
+\say{Training is the interesting part. \emphw{CMA-ES} — gradient-free evolution. Population of \textbf{64 candidate weight vectors per generation}. Each candidate evaluated by a \emphteal{dream rollout} — 50 steps, cumulative $\hat{r}$ becomes the fitness. \textbf{290+ generations, about 8 hours on CPU.}}
+
+\stage{point at the fast-policy GIF on the right}
+
+\say{On the right, the \emphw{deployed controller running in real time}. One forward pass per frame: V $\rightarrow$ C $\rightarrow$ action. The controller is \textbf{override-aware} — when override = 0, it defers to A\textsuperscript{*}; when override = 1, it picks an explicit direction. A hybrid by design.}
+
+\begin{stagebox}
+``3,531 parameters'' — third mention, fully justified. The fast-policy GIF is looping — let it play. $\rightarrow$ ``Now the environment.''
+\end{stagebox}
+\end{slide}
+
+% =====================================================================
+%  SECTION 4 — ENVIRONMENT & PIPELINE  (3 min, cumulative 14:00 – 17:00)
+% =====================================================================
+\section{Environment \& Pipeline \hfill \textcolor{thMuted}{\small 3 min · 14:00 – 17:00}}
+
+% ---- SLIDE 11 ------------------------------------------------------
+\begin{slide}{Slide 11 · 23}{RAWSim-O}{13:30 – 14:30 · 1 min}{Justify the simulator. Four reason cards.}
+\say{Environment: \emphw{RAWSim-O} — open-source warehouse simulator. Four reasons.}
+
+\stage{point at each of the four cards}
+
+\say{\textbf{Reason 1 — Physics-grade fidelity.} Real motion model: continuous acceleration, deceleration, turning radius. Not a grid abstraction.}
+
+\say{\textbf{Reason 2 — On-board camera support.} GymServer streams 96$\times$96$\times$3 RGB from each robot's perspective — \emphw{identical to what a real robot's camera sees}. \textbf{This is critical} for my methodology: I train on pixels, not coordinates.}
+
+\say{\textbf{Reason 3 — Standard MAPF baselines.} CBS, BCP, FAR, WHCA\textsuperscript{*}, OD\_ID, PAS — all built in for honest benchmarking.}
+
+\say{\textbf{Reason 4 — Open-source and reproducible.} C\# implementation, standard benchmark instances.}
+
+\beat
+\say{RAWSim-O fills the gap between toy gym envs and real warehouses — \textbf{high fidelity AND visual}. Coordinate-only training does not transfer; \emphw{pixel-trained world models do}.}
+
+\begin{stagebox}
+Four reasons with clear rhythm. ``This is critical'' — lean in. $\rightarrow$ Slide 12.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 12 ------------------------------------------------------
+\begin{slide}{Slide 12 · 23}{Pipeline}{14:30 – 15:30 · 1 min}{End-to-end flow. Two phases visible side-by-side.}
+\say{Two phases.}
+
+\stage{point at the offline-phase panel on the left}
+
+\say{\emphw{Phase A — Offline Training.} RAWSim-O simulator runs on port 7654. Python client connects via TCP through PettingZoo's ParallelEnv. Dataset: 20 episodes $\times$ 32 bots $\times$ 1{,}000 frames. From there, \textbf{train V (VAE) and M (MDN-RNN) offline}. Then \emphteal{CMA-ES trains C inside dreams — no simulator}. Output: \emphw{controller\_best.npy, 3{,}531 parameters}.}
+
+\stage{point at the deployment panel on the right}
+
+\say{\emphw{Phase B — Deployment.} Per robot: observation $\rightarrow$ V $\rightarrow$ z $\rightarrow$ [z $\oplus$ h] $\rightarrow$ C $\rightarrow$ action.}
+\beat
+\say{\textbf{About 1 millisecond per decision. No comm bottleneck. One robot fails — others continue. Each robot is its own brain.}}
+
+\begin{stagebox}
+``Each robot is its own brain'' — quotable, slow delivery. $\rightarrow$ Slide 13.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 13 ------------------------------------------------------
+\begin{slide}{Slide 13 · 23}{Dataset}{15:30 – 16:30 · 1 min}{Concrete numbers. Six stat tiles plus two side panels.}
+\say{Dataset statistics.}
+
+\stage{point at the six stat tiles}
+
+\say{\textbf{20 episodes} from \texttt{jenkinsinstance1}. \textbf{32 bots} per episode. \textbf{1{,}000 steps} per episode. \textbf{640{,}000} total transitions. Image \textbf{96$\times$96} RGB uint8. Reward range \textbf{[$-$6, $+$2]} with mean about \textbf{0.003}.}
+
+\stage{point at the reward-signal panel}
+
+\say{Reward signal breakdown: throughput component is \textbf{$+$0 to $+$2 per step} — items handled, orders completed. Collision penalty is \textbf{$-$1 to $-$6 per step}. Mean reward of 0.003 means the signal is very sparse.}
+
+\stage{point at the action-space panel}
+
+\say{Action space — three integer dimensions: \texttt{direction\_idx} (4 cardinal directions plus override), \texttt{accel\_mode} (3 levels), \texttt{decel\_mode} (3 levels).}
+\beat
+\say{Sparse reward is hard. This is one of the reasons I chose \emphw{CMA-ES} — gradient-free, robust to sparse signals.}
+
+\begin{stagebox}
+Numbers read briskly. ``Sparse reward is hard'' — owning the problem. $\rightarrow$ ``Now the demos.''
+\end{stagebox}
+\end{slide}
+
+% =====================================================================
+%  SECTION 5 — WORLD-MODEL DEMOS  (6 min, cumulative 17:00 – 23:00)
+% =====================================================================
+\section{World-Model Demos \hfill \textcolor{thMuted}{\small 6 min · 17:00 – 23:00}}
+
+% ---- SLIDE 14 ------------------------------------------------------
+\begin{slide}{Slide 14 · 23}{Demo · Ground Truth vs Dream}{16:30 – 18:00 · 1.5 min}{First payoff. The GIF on the left, observation list on the right.}
+\stage{GIF auto-loops — let it play once before speaking}
+
+\say{First demo. \textbf{Left side: ground truth from the simulator. Right side: the world model imagining the same future, given the same actions.}}
+\beat
+\say{\emphw{The robot has never seen this future.} It is hallucinated.}
+
+\stage{point at the observation list on the right}
+
+\say{What to watch for: at \textbf{t = 1}, near-identical — only VAE recon error. At \textbf{t = 10–20}, the dream tracks scene structure — corridor, sky. At \textbf{t = 30 onward}, the dream loses fine detail; pods blur.}
+\beat
+\say{Honest framing: 50-step horizon is challenging — the model was trained for 1-step prediction, errors compound. The model \emphw{imagines the future — works at short horizon, degrades gracefully}.}
+
+\begin{stagebox}
+Let the GIF loop fully before starting. ``The robot has never seen this future'' — slow, deliberate. $\rightarrow$ Slide 15.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 15 ------------------------------------------------------
+\begin{slide}{Slide 15 · 23}{Demo · Counterfactual}{18:00 – 19:30 · 1.5 min}{Action conditioning works. Same start, four action policies, four divergent panels.}
+\stage{2$\times$2 GIF auto-loops}
+
+\say{Same seed frame, four different action sequences. All four panels start from the \textbf{same real state}.}
+
+\stage{point at each panel}
+
+\say{\textbf{RECORDED}: the actual on-policy rollout. \textbf{ALL-N}: every action ``forward through corridor'' — corridor stays open. \textbf{ALL-STAY}: scene barely changes — bot doesn't move. \textbf{ALL-E}: scene shows a wall approach — turning right from this position leads into a wall.}
+\beat
+\say{The divergence is \textbf{not noise} — it is \emphw{systematic}. Different intentions yield different imagined outcomes. \textbf{Empirical evidence that action conditioning works.}}
+\beat
+\say{Why this matters: for planning in dreams, the model has to respond \emph{differently} to \emph{different} actions. This visual confirms planning is possible.}
+
+\begin{stagebox}
+Point at each panel as you name it. ``Not noise'' — emphasize, slow. $\rightarrow$ Slide 16.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 16 ------------------------------------------------------
+\begin{slide}{Slide 16 · 23}{Demo · Fast Policy}{19:30 – 20:30 · 1 min}{The deployed controller in real time.}
+\stage{fast-policy GIF auto-loops}
+
+\say{The \emphw{deployed controller running in real time}. One forward pass per frame: V $\rightarrow$ C $\rightarrow$ action. \textbf{About 1 millisecond per decision.}}
+
+\stage{point at the overlay reading panel}
+
+\say{Reading the overlay: the arrow is the controller's chosen direction this frame. RECORDED is what AgentAStar would have done at the same step. When the controller deviates from A\textsuperscript{*}, the arrow changes colour — that is the override.}
+
+\stage{point at the pills}
+
+\say{Three properties: \emphw{$\sim$1 ms per frame}, \emphw{no central computation}, \emphw{hybrid override-aware}.}
+\beat
+\say{That's fast mode. The next demo — the most insightful one in the talk — is \emphw{world thinking}: how CMA-ES uses the world model for training.}
+
+\begin{stagebox}
+Faster pace than other demos — set up the climax. ``World thinking'' — lean into the transition. $\rightarrow$ Slide 17.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 17 ------------------------------------------------------
+\begin{slide}{Slide 17 · 23}{Climax · The World Model as the CMA-ES Evaluator}{20:30 – 22:30 · 2 min}{The big reveal. Animated action\_sweep.gif on the left, static summary.png on the right, explanation paragraph and story-rich outcome panel below.}
+\stage{let the slide settle for 5 seconds before speaking — animated sweep on the left, static figure on the right}
+
+\say{When training the controller, \emphw{CMA-ES never touches the simulator}. The question is: \textbf{how does it know which candidate weight vector is good?}}
+\beat[3]
+\say{The answer is on this slide.}
+
+\stage{point at the GIF on the left}
+
+\say{On the \textbf{left} is the live loop. Five different action policies — each imagined in the dream for 50 steps. STAY, NORTH, SOUTH, EAST, WEST — all from the \textbf{same seed}. Watch the dream evolve frame by frame for each one.}
+
+\stage{point at the static figure on the right}
+
+\say{On the \textbf{right} is the static analysis. Top: the seed plus the five final dream frames. Below: the cumulative reward curve and total bars.}
+
+\stage{point at the explanation paragraph and the story-rich outcome panel}
+
+\say{Reading the values from the panel: \textbf{STAY: $-$20} — catastrophic, collisions accumulate. \textbf{WEST: $+$0.14} — open path, the best of the five. \textbf{EAST: $-$9} — wall approach. \textbf{FAST}: the deployed controller chose \textbf{EAST} — good but not optimal.}
+\beat
+\say{There is a \emphw{disagreement}. The fast policy chose EAST. Imagination says WEST is optimal. \textbf{This is not a bug} — it is the trade-off Ha and Schmidhuber describe: the fast deployed policy trades optimality for speed.}
+\beat
+\say{What you are seeing is the \emphw{training mechanism made visible}. From a single seed, 5 candidate actions yield 5 different cumulative rewards — \textbf{visible only through the world model}.}
+\beat
+\say{This is \textbf{why CMA-ES training is possible} — the world model provides the fitness signal that would otherwise need a real environment.}
+
+\begin{stagebox}
+Longest slide. Don't rush. \textbf{This is the climax.} Long pause before the reveal. Point at the GIF, then the static figure, then the panel — three discrete reads. ``Training mechanism made visible'' — quotable. $\rightarrow$ Slide 18.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 18 ------------------------------------------------------
+\begin{slide}{Slide 18 · 23}{Demo · CMA-ES Evolution}{22:30 – 24:00 · 1.5 min}{Show training over time. PCA trajectory + fitness curve + dream inset.}
+\stage{evolution GIF auto-loops}
+
+\say{Last demo for the world model. \textbf{30 saved checkpoints} from training, projected to 2D via PCA, animated.}
+
+\stage{point through the panels}
+
+\say{Each dot is the controller at one generation. Colour encodes fitness. From a random init at fitness \textbf{$-$0.86}, CMA-ES dives toward the peak at \textbf{$+$7.05} — generations \textbf{100 to 140} — then drifts past it back to around \textbf{$+$5}.}
+
+\stage{point at the annotated insights panel}
+
+\say{Three insights. \emphw{PC1 explains 57.7\% of parameter variance.} Trajectory is \emphw{curved} — CMA-ES is evolutionary, not gradient. And critically: \emphw{best fitness is mid-training, not at the end} — that is why I use \textbf{early stopping}, deploying \texttt{controller\_best.npy}, not the latest checkpoint.}
+
+\begin{stagebox}
+Three insights spoken with rhythm. ``Best fitness is mid-training, not at the end'' — emphasize. $\rightarrow$ ``Now the quantitative side.''
+\end{stagebox}
+\end{slide}
+
+% =====================================================================
+%  SECTION 6 — BENCHMARK & RESULTS  (3 min, cumulative 24:00 – 27:00)
+% =====================================================================
+\section{Benchmark \& Results \hfill \textcolor{thMuted}{\small 3 min · 24:00 – 27:00}}
+
+% ---- SLIDE 19 ------------------------------------------------------
+\begin{slide}{Slide 19 · 23}{Quantitative World-Model Quality}{24:00 – 25:00 · 1 min}{Honest evaluation of imagination fidelity.}
+\stage{MSE/SSIM plot is shown}
+
+\say{Quantitative evaluation. Two metrics: pixel-level MSE on the left, structural similarity SSIM on the right. Three temperatures, $\pm$1$\sigma$ band across two episodes.}
+
+\stage{point at the four stat tiles on the right}
+
+\say{\emphteal{MSE at t=1: 0.025} — that's the VAE recon floor. \emphcoral{MSE at t=49: 0.10} — acceptable for demos. \emphteal{SSIM at t=1: 0.68}. \emphcoral{SSIM at t=49: 0.45} — degraded.}
+
+\stage{point at the bullet text}
+
+\say{$\tau = 0.5$ — the balanced temperature — is the most stable. $\tau = 1.0$ is noisier toward the end. $\tau = 0$ is over-confident.}
+\beat
+\say{\emphw{Reliable horizon $\approx$ 30 steps} — matches my CMA-ES rollout config of 50 total steps.}
+
+\begin{stagebox}
+Numbers read briskly. $\rightarrow$ Slide 20.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 20 ------------------------------------------------------
+\begin{slide}{Slide 20 · 23}{Centralized PP Comparison}{25:00 – 26:30 · 1.5 min}{Set up what I need to beat. Throughput chart on left, comparison table on right.}
+\stage{throughput chart shown}
+
+\say{Benchmark from RAWSim-O: 7 path-planning algorithms, 3 random seeds, jenkinsinstance1, 32 bots.}
+
+\stage{point at the table}
+
+\say{The centralized planners — top six rows, FAR, CBS, BCP, WHCAvStar, WHCAnStar, OD\_ID — achieve about \textbf{3{,}150 items handled per episode} with \emphteal{zero collisions}.}
+
+\stage{point at the highlighted last row}
+
+\say{\emphw{AgentAStar} — decentralized rule-based — handles slightly more items, \textbf{3{,}197}, but with \emphcoral{1{,}339 collisions per episode}.}
+\beat
+\say{The classic trade-off: centralized = clean coordination but fragile. Decentralized rule-based = collisions explode.}
+\beat
+\say{\textbf{The bar to clear: minimise collisions while staying decentralized.}}
+
+\begin{stagebox}
+``1,339 collisions'' — emphasize. The research question is implicit — let the table do the work. $\rightarrow$ Slide 21.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 21 ------------------------------------------------------
+\begin{slide}{Slide 21 · 23}{Where We Stand}{26:30 – 27:30 · 1 min}{Honest about state. Radar chart + status table + summary panel.}
+\stage{radar chart and tables shown}
+
+\say{Status, transparently.}
+
+\stage{point at the radar}
+
+\say{Centralized planners across multi-metric — throughput, distance, energy, kinematics — converge to a similar profile.}
+
+\stage{point at the status table}
+
+\say{Three rows. \textbf{Centralized planners}: not decentralized, zero collisions, mature baselines. \textbf{AgentAStar}: decentralized, but \textbf{1{,}339+ collisions}. \emphw{Our world model, in-dream}: decentralized, collisions \textbf{TBD}, status \textbf{training done · real-eval next}.}
+
+\stage{point at the in-dream summary panel}
+
+\say{In-dream summary: trained on AgentAStar baseline data; best controller at gen 100–140 with $\Sigma$ predicted reward \textbf{$+$7.05}. Real-environment evaluation pending.}
+\beat
+\say{The architecture is set; we now need integration testing. \emphw{The deploy bridge has been built — what remains is just running the 30-episode benchmark.}}
+
+\begin{stagebox}
+``Transparently'' — sets the tone. ``Bridge built — just running the benchmark'' — pre-empts the obvious advisor question. $\rightarrow$ Slide 22.
+\end{stagebox}
+\end{slide}
+
+% =====================================================================
+%  SECTION 7 — REMAINING WORK & CLOSE  (1.5 min, cumulative 27:00 – 28:30)
+% =====================================================================
+\section{Remaining Work \& Close \hfill \textcolor{thMuted}{\small 1.5 min · 27:00 – 28:30}}
+
+% ---- SLIDE 22 ------------------------------------------------------
+\begin{slide}{Slide 22 · 23}{Remaining Tasks}{27:30 – 28:00 · 30 sec}{The deploy bridge is done — only two tasks remain.}
+\stage{two-card layout shown}
+
+\say{Two concrete tasks. \emphw{The deploy bridge is already built — that is why it is not on this list.}}
+
+\stage{point at Task 01}
+
+\say{\textbf{Task 01 — Hyperparameter sweep.} $\beta$-KL weight for the VAE, latent dim across \textbf{\{32, 64, 128, 224\}}. GMM components \textbf{\{5, 7, 10\}} for the MDN-RNN. CMA-ES $\sigma$-initial, population, dream horizon. Reward shaping — collision penalty weight.}
+
+\stage{point at Task 02}
+
+\say{\textbf{Task 02 — Larger training set.} Currently at 100 episodes — 640{,}000 transitions. Target 100+ episodes with diverse instance configs — \texttt{jenkinsinstance2}, \texttt{jenkinsinstance3}. Retrain V and M, re-run CMA-ES.}
+\beat
+\say{\emphw{Mostly parallelizable} tuning and data-scaling work.}
+
+\begin{stagebox}
+Brisk and business-like. ``Deploy bridge already built'' — repeat for the advisor. $\rightarrow$ Slide 23.
+\end{stagebox}
+\end{slide}
+
+% ---- SLIDE 23 ------------------------------------------------------
+\begin{slide}{Slide 23 · 23}{Closing}{28:00 – 28:30 · 30 sec; image holds}{Memorable closing. Three sentences, one final caption, then silence.}
+\stage{closing slide is shown — three sentences on the left, the Scenario E summary as the final visual on the right}
+\stage{slow, deliberate, three sentences}
+
+\say{Three sentences.}
+\beat
+\say{\textbf{World models reframe RMFS control as imagination plus a tiny linear policy.}}
+\beat
+\say{\textbf{The model learns visual dynamics from pixels alone, with action conditioning that drives different imagined futures.}}
+\beat
+\say{\textbf{With 3{,}531 controller parameters and zero real-environment training steps, we have a decentralized agent ready for real-environment benchmarking.}}
+\beat[3]
+\say{My closing line:}
+\beat
+\say{\textit{\textbf{Each frame is a future the robot considered.}}}
+
+\begin{stagebox}
+Three sentences spoken \textbf{slowly, deliberately, clearly}. 2-second pauses between sentences. ``Each frame is a future the robot considered'' — the final memorable phrase. \textbf{Stay silent.} Don't fill the silence. Let it land. If the advisor stays silent past 5 seconds: ``I am happy to take questions.''
+\end{stagebox}
+\end{slide}
+
+
+% =====================================================================
+%  Q & A PREPARATION
+% =====================================================================
+\section{Q\&A Preparation \hfill \textcolor{thMuted}{\small 5 min budget}}
+
+\subsection*{Q1 · ``Why CMA-ES instead of PPO/SAC?''}
+\say{Three reasons. (1) The action space contains a discrete argmax — gradient flow is blocked, gradient-based methods need a continuous relaxation. (2) Reward is very sparse — mean 0.003. (3) CMA-ES is gradient-free with parallel candidate evaluation — fits dream-based training naturally.}
+
+\subsection*{Q2 · ``Isn't 20 episodes too small?''}
+\say{Acknowledged on Slides 13 and 22. 20 episodes $\times$ 32 bots $\times$ 1{,}000 steps = 640{,}000 transitions — order of magnitude similar to H\&S 2018. What matters more is diversity, which is why Task 02 expands to 100+ episodes with multiple instance configs.}
+
+\subsection*{Q3 · ``How does the controller handle multiple bots?''}
+\say{Each bot runs an independent WorldModelBot instance — no shared state, no communication. That is the definition of decentralized. Collision risk is higher than centralized PP — the long-term mitigation is multi-agent emergent communication, beyond the current scope.}
+
+\subsection*{Q4 · ``Is the comparison with centralized PP fair?''}
+\say{Setup is identical: jenkinsinstance1, 32 bots, same config. What differs: centralized PP has access to ground-truth state for every bot; the world-model controller only has the egocentric camera. So it is a \textbf{fundamental handicap} — but that is exactly the point: vision-only matches the real warehouse setting.}
+
+\subsection*{Q5 · ``What's your original innovation beyond H\&S 2018?''}
+\say{Three contributions. (1) \textbf{6-channel frame stacking} for motion cueing. (2) \textbf{Override-aware action encoding} — hybrid A\textsuperscript{*} + learned override. (3) A \textbf{visualization toolkit} — the per-state action sweep on Slide 17 and the training-trajectory PCA on Slide 18 — visualizations not present in any existing world-model paper.}
+
+\subsection*{Q6 · ``Why a horizon of 50 in CMA-ES rollouts?''}
+\say{A trade-off between fidelity and signal. SSIM at Slide 19 drops from 0.68 to 0.45 over 50 steps. Longer than that, the dream becomes unreliable; shorter, the planning horizon is too narrow. 50 steps is the empirical sweet spot.}
+
+\subsection*{Q7 · ``Why pixel reconstruction over JEPA?''}
+\say{Two reasons. The pixel-reconstruction lineage is mature — VAE plus MDN-RNN is widely reproduced. And having a decoder gives me \textbf{interpretability tools} — every dream visualization on Slides 14, 15, 17, and 18 requires a decoder. JEPA is on my exploration list.}
+
+% =====================================================================
+%  RESPONSE PROTOCOLS
+% =====================================================================
+\section{Response Protocols}
+
+\subsection*{If the advisor stops you mid-talk}
+\begin{enumerate}[leftmargin=1.4em, itemsep=0.2em]
+\item \textbf{Stop immediately} — don't finish the sentence.
+\item \textbf{Listen fully.}
+\item \textbf{Pause 1–2 seconds before answering} — signal thoughtfulness.
+\item Answer the question \textbf{directly first}, then the related context.
+\item If you don't know: \textit{``I haven't tested that explicitly, but my hypothesis would be…''}
+\end{enumerate}
+
+\subsection*{If the advisor looks bored}
+\begin{itemize}[leftmargin=1.4em, itemsep=0.2em]
+\item Skip technical details on less-critical slides.
+\item Jump to a demo earlier — visuals maintain attention.
+\end{itemize}
+
+\subsection*{If the advisor looks skeptical}
+\begin{itemize}[leftmargin=1.4em, itemsep=0.2em]
+\item Don't be defensive.
+\item Acknowledge: \textit{``You're right — that's a valid concern. I address it in [Slide X].''}
+\end{itemize}
+
+% =====================================================================
+%  MEMORABLE PHRASES
+% =====================================================================
+\section{Memorable Phrases}
+
+Sentences the advisor should remember after the talk:
+
+\begin{enumerate}[leftmargin=1.4em, itemsep=0.3em]
+\item \textcolor{thAmber}{\textbf{``Each robot is its own brain.''}} \hfill \textit{(Slide 12)}
+\item \textcolor{thAmber}{\textbf{``Five possible futures, weighted.''}} \hfill \textit{(Slide 09)}
+\item \textcolor{thAmber}{\textbf{``The training mechanism made visible.''}} \hfill \textit{(Slide 17)}
+\item \textcolor{thAmber}{\textbf{``Each frame is a future the robot considered.''}} \hfill \textit{(closing)}
+\item \textcolor{thAmber}{\textbf{``3,531 parameters and zero real-environment training steps.''}} \hfill \textit{(Slide 23)}
+\item \textcolor{thAmber}{\textbf{``The robot has never seen this future.''}} \hfill \textit{(Slide 14)}
+\end{enumerate}
+
+\bigskip
+\hrule
+\bigskip
+
+\begin{center}
+\small\itshape\color{thMuted}
+End of speaking script.\\
+NTUST · CITI Lab — TEEP Progress Update — 2026
+\end{center}
+
+\end{document}
