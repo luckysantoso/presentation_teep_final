@@ -39,9 +39,9 @@
         /* Text */
         --text-primary: #ece6d6;
         --text-strong: #fffaec;
-        --text-secondary: #8a95a7;
-        --text-muted: #5a6273;
-        --text-faint: #3a4252;
+        --text-secondary: #b8c2d4;
+        --text-muted: #8a93a6;
+        --text-faint: #6b7589;
 
         /* Accents — semantic */
         --accent-amber: #f4a261; /* highlights, emphasis */
@@ -64,7 +64,9 @@
         --hero-size: clamp(2.25rem, 5.5vw, 4.75rem);
         --h2-size: clamp(1.15rem, 2.6vw, 2rem);
         --h3-size: clamp(0.95rem, 1.7vw, 1.35rem);
+        --large-size: clamp(0.85rem, 1.3vw, 1.18rem);
         --body-size: clamp(0.72rem, 1.05vw, 0.98rem);
+        --medium-size: clamp(0.7rem, 0.95vw, 0.9rem);
         --small-size: clamp(0.62rem, 0.8vw, 0.78rem);
         --micro-size: clamp(0.55rem, 0.7vw, 0.7rem);
         --code-size: clamp(0.65rem, 0.95vw, 0.88rem);
@@ -291,7 +293,7 @@
 
       .eyebrow {
         font-family: var(--font-mono);
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         font-weight: 500;
         letter-spacing: 0.22em;
         text-transform: uppercase;
@@ -602,7 +604,7 @@
       table.lab {
         width: 100%;
         border-collapse: collapse;
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         font-family: var(--font-body);
       }
       table.lab th,
@@ -703,7 +705,7 @@
         justify-content: space-between;
         align-items: flex-start;
         font-family: var(--font-mono);
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         letter-spacing: 0.22em;
         text-transform: uppercase;
         color: var(--text-secondary);
@@ -762,7 +764,7 @@
       }
       .brand-text {
         font-family: var(--font-mono);
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         letter-spacing: 0.22em;
         text-transform: uppercase;
         color: var(--accent-amber);
@@ -812,7 +814,7 @@
         align-items: flex-end;
         gap: 1rem;
         font-family: var(--font-mono);
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         letter-spacing: 0.06em;
         color: var(--text-secondary);
       }
@@ -879,7 +881,7 @@
         margin-top: clamp(0.7rem, 1.5vw, 1.1rem);
         padding-top: clamp(0.5rem, 1vw, 0.7rem);
         border-top: 1px dashed var(--border-subtle);
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         color: var(--text-secondary);
       }
       .takeaway::before {
@@ -891,6 +893,22 @@
       .takeaway b {
         color: var(--text-strong);
         font-weight: 500;
+      }
+
+      .cite {
+        margin-top: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: var(--micro-size);
+        letter-spacing: 0.04em;
+        color: var(--text-muted);
+        opacity: 0.95;
+      }
+      .cite::before {
+        content: "▸ ";
+        color: var(--accent-amber);
+      }
+      .cite + .cite {
+        margin-top: 0.15rem;
       }
 
       /* ============================================================
@@ -1049,7 +1067,7 @@
         margin-top: 0.35rem;
       }
       .stat-tile .stat-sub {
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         color: var(--text-muted);
         margin-top: 0.1rem;
       }
@@ -1073,7 +1091,7 @@
         content: counter(li, decimal-leading-zero);
         counter-increment: li;
         font-family: var(--font-mono);
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         color: var(--accent-amber);
         font-weight: 500;
         letter-spacing: 0.05em;
@@ -1147,7 +1165,7 @@
         color: var(--accent-amber);
       }
       .prop-card .prop-desc {
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         color: var(--text-secondary);
         margin-top: 0.35rem;
         line-height: 1.5;
@@ -1458,7 +1476,7 @@
         gap: clamp(0.7rem, 2vw, 1.8rem);
         margin-top: 1rem;
         font-family: var(--font-mono);
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         color: var(--text-secondary);
         flex-wrap: wrap;
       }
@@ -1716,7 +1734,7 @@
         font-weight: 300;
       }
       .flow-node .desc {
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
         color: var(--text-secondary);
         margin-top: 0.25rem;
         line-height: 1.4;
@@ -1828,7 +1846,7 @@
         display: flex;
         flex-direction: column;
         gap: clamp(0.3rem, 0.7vw, 0.55rem);
-        font-size: var(--small-size);
+        font-size: var(--medium-size);
       }
       .obs-list li {
         display: grid;
@@ -2096,11 +2114,6 @@
             </li>
           </ol>
         </div>
-
-        <div class="takeaway reveal">
-          From <b>fragile centralization</b> → to <b>imagined dynamics</b> → to
-          a <b>tiny decentralized policy</b>.
-        </div>
       </div>
     </section>
 
@@ -2200,9 +2213,9 @@
           </div>
         </div>
 
-        <div class="takeaway reveal">
-          Centralized control is <b>elegant in theory</b>, but the entire
-          operation lives or dies with one process.
+        <div class="cite reveal">
+          Lamballais, Roy &amp; De Koster (2017), <i>EJOR</i> 256(3) ·
+          Merrick &amp; Wojtkiewicz (2024), <i>RAWSim-O</i>.
         </div>
       </div>
     </section>
@@ -2211,7 +2224,7 @@
      SLIDE 3 — WHEN THINGS BREAK
      3 column icon cards + failure modes table
      ============================================================ -->
-    <section class="slide" data-section="01" data-section-label="Background">
+    <!-- <section class="slide" data-section="01" data-section-label="Background">
       <header class="slide-header">
         <div class="section-tag">
           <span class="num">01</span><span class="sep">/</span
@@ -2234,35 +2247,35 @@
           class="cols-3 reveal stagger"
           style="margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem)"
         >
-          <!-- Card 1 — server crash -->
+          [[ Card 1 — server crash ]]
           <div class="panel panel--accent">
             <span class="panel-tab">Mode 01</span>
             <h3 style="color: var(--accent-coral); margin-bottom: 0.3rem">
               Central Server Crash
             </h3>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               A single OS-level failure halts the planner. Every robot freezes
               mid-path. There is no fallback.
             </p>
           </div>
-          <!-- Card 2 — network -->
+          [[ Card 2 — network ]]
           <div class="panel panel--accent">
             <span class="panel-tab">Mode 02</span>
             <h3 style="color: var(--accent-coral); margin-bottom: 0.3rem">
               Network Partition
             </h3>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               TCP/wireless dropout strands robots without new paths. They either
               stop or run a stale plan into a wall.
             </p>
           </div>
-          <!-- Card 3 — robot fail -->
+          [[ Card 3 — robot fail ]]
           <div class="panel panel--accent">
             <span class="panel-tab">Mode 03</span>
             <h3 style="color: var(--accent-coral); margin-bottom: 0.3rem">
               Robot Sensor Fault
             </h3>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               A single bot reporting unknown state triggers full-fleet
               replanning — combinatorial cost.
             </p>
@@ -2316,7 +2329,7 @@
           <b>system-wide stoppage.</b>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- ============================================================
      SLIDE 4 — DECENTRALIZED VISION
@@ -2367,7 +2380,7 @@
                   color: var(--accent-teal);
                 "
               >
-                Local decision · local resilience
+                Local decision
               </div>
             </div>
           </div>
@@ -2377,16 +2390,10 @@
             class="reveal stagger"
             style="display: flex; flex-direction: column; gap: 0.8rem"
           >
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--large-size)">
               Decentralized = each robot owns a local policy and observes the
               world via its own sensors. One robot fails → the rest
               <b style="color: var(--text-strong)">continue operating.</b>
-            </p>
-            <p class="dim" style="font-size: var(--small-size)">
-              The challenge: <i>how</i> do robots make smart decisions
-              <i>without seeing the whole map</i>? Old answer — rule-based. New
-              answer (this work) — a
-              <b style="color: var(--accent-amber)">world model.</b>
             </p>
 
             <div class="cols-3" style="margin-top: 0.3rem">
@@ -2399,7 +2406,7 @@
               </div>
               <div class="prop-card">
                 <div class="prop-num">Property 02</div>
-                <div class="prop-title"><em>Vision-only</em></div>
+                <div class="prop-title"><em>Vision input</em></div>
                 <div class="prop-desc">
                   Pixels in, action out. No coordinates.
                 </div>
@@ -2754,7 +2761,7 @@
             <cite>— Ha &amp; Schmidhuber, 2018</cite>
           </div>
           <div>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>
                 Trained from <b>observation data</b> alone — no physics engine,
                 no hand-crafted rules.
@@ -2775,6 +2782,10 @@
         <div class="takeaway reveal">
           World model = <b>imagination engine</b> + <b>reward predictor</b>.
           Together: a self-contained training environment.
+        </div>
+
+        <div class="cite reveal">
+          Ha &amp; Schmidhuber (2018), <i>World Models</i>, NeurIPS · arXiv:1803.10122.
         </div>
       </div>
     </section>
@@ -2960,7 +2971,7 @@
 
             <p
               class="dim"
-              style="font-size: var(--small-size); margin-top: auto"
+              style="font-size: var(--medium-size); margin-top: auto"
             >
               Variational autoencoder. Stacked conv layers. Reconstruction + KL
               loss.
@@ -3084,7 +3095,7 @@
 
             <p
               class="dim"
-              style="font-size: var(--small-size); margin-top: auto"
+              style="font-size: var(--medium-size); margin-top: auto"
             >
               LSTM with 5-component Gaussian mixture head. Reward head
               co-trained.
@@ -3191,7 +3202,7 @@
 
             <p
               class="dim"
-              style="font-size: var(--small-size); margin-top: auto"
+              style="font-size: var(--medium-size); margin-top: auto"
             >
               One matrix + bias. Trained
               <b style="color: var(--accent-amber)">in dreams</b> via CMA-ES.
@@ -3202,6 +3213,11 @@
         <div class="takeaway reveal">
           V and M are trained <b>offline from data</b>; C is trained inside the
           world model itself — <b>no real-env steps required.</b>
+        </div>
+
+        <div class="cite reveal">
+          Kingma &amp; Welling (2014), <i>VAE</i> · Bishop (1994), <i>MDN</i> ·
+          Hochreiter &amp; Schmidhuber (1997), <i>LSTM</i> · Hansen (2016), <i>CMA-ES</i>.
         </div>
       </div>
     </section>
@@ -3365,13 +3381,12 @@
             <span class="panel-tab">Why H&amp;S 2018 base</span>
             <ul
               class="dot-list"
-              style="font-size: var(--small-size); margin-top: 0.2rem"
+              style="font-size: var(--medium-size); margin-top: 0.2rem"
             >
               <li>
                 Smallest controller (<b>3,531 params</b>) — interpretable.
               </li>
               <li>CMA-ES handles <b>discrete actions</b> cleanly.</li>
-              <li>Proven on visual 3D envs analogous to warehouse cameras.</li>
             </ul>
           </div>
           <div class="panel" style="padding: 0.6rem 0.85rem">
@@ -3380,13 +3395,12 @@
             >
             <ul
               class="dot-list"
-              style="font-size: var(--small-size); margin-top: 0.2rem"
+              style="font-size: var(--medium-size); margin-top: 0.2rem"
             >
               <li>Predicts <b>embeddings</b>, not pixels — no decoder.</li>
               <li>
                 Could replace VAE + MDN-RNN with a single embedding predictor.
               </li>
-              <li>Future direction — see slide 24.</li>
             </ul>
           </div>
           <div class="panel" style="padding: 0.6rem 0.85rem">
@@ -3395,13 +3409,18 @@
             >
             <ul
               class="dot-list"
-              style="font-size: var(--small-size); margin-top: 0.2rem"
+              style="font-size: var(--medium-size); margin-top: 0.2rem"
             >
               <li>2-frame stacking for <b>motion cues</b>.</li>
               <li>11-dim action (override · dir · accel · decel).</li>
               <li>Sparse warehouse reward (throughput − collisions).</li>
             </ul>
           </div>
+        </div>
+
+        <div class="cite reveal">
+          Ha &amp; Schmidhuber (2018) · Hafner et al. (2020) <i>Dreamer</i> ·
+          Hafner et al. (2021) <i>DreamerV2</i> · Hafner et al. (2023) <i>DreamerV3</i>, arXiv:2301.04104.
         </div>
       </div>
     </section>
@@ -3438,7 +3457,7 @@
           <div class="flow-node">
             <div class="stage">Step 01 · offline</div>
             <div class="name">RMFS data</div>
-            <div class="desc">PettingZoo<br />20 ep × 32 bots</div>
+            <div class="desc">PettingZoo<br />100 ep × 32 bots</div>
           </div>
           <div class="flow-arrow">▶</div>
           <div class="flow-node">
@@ -3595,7 +3614,7 @@
                 alt="VAE reconstruction at training epoch 99"
               />
             </div>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>
                 <b>6-channel input</b> (frame stacking) → motion cue from a
                 single forward pass.
@@ -3614,6 +3633,11 @@
               <span class="pill pill--teal">~1 300× compression</span>
             </div>
           </div>
+        </div>
+
+        <div class="cite reveal">
+          Kingma &amp; Welling (2014), <i>Auto-Encoding Variational Bayes</i>,
+          ICLR · arXiv:1312.6114.
         </div>
       </div>
     </section>
@@ -3718,7 +3742,7 @@
               </div>
             </div>
 
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>
                 <b>5 Gaussians</b> = "five possible futures, weighted."
                 Multimodal dynamics (e.g., bot at junction).
@@ -3765,11 +3789,9 @@
           </div>
         </div>
 
-        <div class="takeaway reveal">
-          One seed → <b>five</b> imagined trajectories, each pinned to a
-          different Gaussian mode and weighted by π<sub>k</sub>. After 7 dream
-          steps, the modes diverge into <b>visibly different futures</b> — the
-          model has genuinely multimodal dynamics.
+        <div class="cite reveal">
+          Bishop (1994), <i>Mixture Density Networks</i>, NCRG/94/004 ·
+          Hochreiter &amp; Schmidhuber (1997), <i>LSTM</i>, Neural Computation 9(8).
         </div>
       </div>
     </section>
@@ -3792,7 +3814,7 @@
       <div class="slide-content">
         <div class="section-title-block">
           <span class="eyebrow reveal">Component C — A Tiny Linear Policy</span>
-          <h2 class="title reveal"><em>3,531 parameters</em> are enough.</h2>
+          <h2 class="title reveal">Controller</h2>
         </div>
 
         <div class="split-2">
@@ -3820,7 +3842,7 @@
 
             <div class="panel" style="margin-top: 0.7rem">
               <span class="panel-tab">CMA-ES Training</span>
-              <ul class="dot-list" style="font-size: var(--small-size)">
+              <ul class="dot-list" style="font-size: var(--medium-size)">
                 <li>
                   Population: <b>64 candidate</b> weight vectors per generation.
                 </li>
@@ -3847,7 +3869,7 @@
                 alt="Fast controller running per-frame inference"
               />
             </div>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               <b style="color: var(--text-strong)">Override-aware</b> action:
               <code class="mono" style="color: var(--accent-amber)"
                 >override = 0</code
@@ -3860,6 +3882,11 @@
               beneficial — a hybrid by design.
             </p>
           </div>
+        </div>
+
+        <div class="cite reveal">
+          Hansen (2016), <i>The CMA Evolution Strategy: A Tutorial</i>,
+          arXiv:1604.00772.
         </div>
       </div>
     </section>
@@ -3895,7 +3922,7 @@
             <h3 style="color: var(--text-strong); margin-bottom: 0.3rem">
               Physics-grade fidelity
             </h3>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               Real motion model — acceleration, deceleration, turning radius.
               Continuous spatial state, not a grid abstraction. Comparable to
               real Kiva-style dynamics.
@@ -3906,7 +3933,7 @@
             <h3 style="color: var(--accent-amber); margin-bottom: 0.3rem">
               On-board camera support
             </h3>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               GymServer streams
               <b style="color: var(--text-strong)">96×96×3 RGB</b> from each
               robot's perspective — identical to what a real robot would see.
@@ -3919,8 +3946,8 @@
             <h3 style="color: var(--text-strong); margin-bottom: 0.3rem">
               Standard MAPF baselines
             </h3>
-            <p class="dim" style="font-size: var(--small-size)">
-              Built-in: CBS · BCP · FAR · WHCA* · OD_ID · PAS — for honest
+            <p class="dim" style="font-size: var(--medium-size)">
+              Built-in: CBS · BCP · FAR · WHCA* · OD_ID · PAS — for
               benchmarking against the strongest centralized planners.
             </p>
           </div>
@@ -3929,17 +3956,17 @@
             <h3 style="color: var(--text-strong); margin-bottom: 0.3rem">
               Open-source &amp; reproducible
             </h3>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               C# implementation. Standard benchmark instances. Other groups can
               replicate or contest our numbers.
             </p>
           </div>
         </div>
 
-        <div class="takeaway reveal">
-          Fills the gap between toy gym envs and real warehouses —
-          <b>high fidelity AND visual.</b> Coordinate-only training does not
-          transfer; <b>pixel-trained world models do.</b>
+        <div class="cite reveal">
+          Merrick &amp; Wojtkiewicz (2024), <i>RAWSim-O</i> ·
+          Sharon, Stern, Felner &amp; Sturtevant (2015), <i>CBS</i>,
+          Artificial Intelligence 219.
         </div>
       </div>
     </section>
@@ -4088,7 +4115,7 @@
             </div>
 
             <div style="margin-top: auto; padding-top: 0.6rem">
-              <ul class="dot-list" style="font-size: var(--small-size)">
+              <ul class="dot-list" style="font-size: var(--medium-size)">
                 <li>
                   <b style="color: var(--accent-teal)">~1 ms / decision.</b>
                 </li>
@@ -4211,7 +4238,7 @@
             <span class="panel-tab">Reward signal — breakdown</span>
             <ul
               class="dot-list"
-              style="font-size: var(--small-size); margin-top: 0.3rem"
+              style="font-size: var(--medium-size); margin-top: 0.3rem"
             >
               <li>
                 <b style="color: var(--accent-teal)">Throughput component:</b>
@@ -4227,7 +4254,7 @@
             <span class="panel-tab">Action space — 3 dims</span>
             <ul
               class="dot-list"
-              style="font-size: var(--small-size); margin-top: 0.3rem"
+              style="font-size: var(--medium-size); margin-top: 0.3rem"
             >
               <li><b>direction_idx</b> · 4 cardinal + override.</li>
               <li><b>accel_mode</b> · 3 levels.</li>
@@ -4254,7 +4281,7 @@
 
       <div class="slide-content">
         <div class="section-title-block">
-          <span class="eyebrow reveal">Scenario A · World Thinking</span>
+          <span class="eyebrow reveal">World Planning</span>
           <h2 class="title reveal">
             Ground truth <em>vs</em> imagined future.
           </h2>
@@ -4305,12 +4332,12 @@
             <p
               class="dim"
               style="
-                font-size: var(--small-size);
+                font-size: var(--medium-size);
                 border-left: 1px dashed var(--border-subtle);
                 padding-left: 0.7rem;
               "
             >
-              Honest framing: 50-step horizon is <b>challenging</b> — the model
+              50-step horizon is <b>challenging</b> — the model
               was trained for 1-step prediction. Errors compound. That is
               expected and healthy.
             </p>
@@ -4340,7 +4367,7 @@
 
       <div class="slide-content">
         <div class="section-title-block">
-          <span class="eyebrow reveal">Scenario B · Action Conditioning</span>
+          <span class="eyebrow reveal">Action Conditioning</span>
           <h2 class="title reveal">
             Same start, <em>different actions</em>, different futures.
           </h2>
@@ -4395,7 +4422,7 @@
             <p
               class="dim"
               style="
-                font-size: var(--small-size);
+                font-size: var(--medium-size);
                 border-left: 2px solid var(--accent-amber);
                 padding-left: 0.7rem;
               "
@@ -4430,9 +4457,9 @@
 
       <div class="slide-content">
         <div class="section-title-block">
-          <span class="eyebrow reveal">Scenario D · Deployed Controller</span>
+          <span class="eyebrow reveal">Deployed Controller</span>
           <h2 class="title reveal">
-            Fast mode — <em>one forward pass, ~1 ms.</em>
+            Fast mode</em>
           </h2>
         </div>
 
@@ -4488,10 +4515,6 @@
             </div>
           </div>
         </div>
-
-        <div class="takeaway reveal">
-          This is what gets deployed — <b>fast, per-frame, on-board.</b>
-        </div>
       </div>
     </section>
 
@@ -4502,7 +4525,7 @@
       <header class="slide-header">
         <div class="section-tag">
           <span class="num">05</span><span class="sep">/</span
-          ><span class="label">Results · Climax Demo</span>
+          ><span class="label">Results · Deployed Controller</span>
         </div>
         <div class="slide-meta">
           <span>17 · 23</span><span class="pip"></span>
@@ -4511,9 +4534,9 @@
 
       <div class="slide-content">
         <div class="section-title-block">
-          <span class="eyebrow reveal">Scenario E · The Climax</span>
+          <span class="eyebrow reveal">Deployed Controller</span>
           <h2 class="title reveal">
-            The world model <em>is</em> the fitness evaluator.
+            World Planning Mode
           </h2>
         </div>
 
@@ -4569,7 +4592,7 @@
             align-items: start;
           "
         >
-          <p style="font-size: var(--small-size); line-height: 1.55">
+          <p style="font-size: var(--medium-size); line-height: 1.55">
             During training, the controller never touches the simulator. For
             each weight vector W, we run a
             <b style="color: var(--accent-teal)">dream rollout</b>, sum
@@ -4614,10 +4637,15 @@
           </div>
         </div>
 
-        <div class="takeaway reveal">
+        <!-- <div class="takeaway reveal">
           This is <b>why CMA-ES training is possible</b> — the world model
           provides the fitness signal that would otherwise need a real
           environment.
+        </div> -->
+
+        <div class="cite reveal">
+          Hansen (2016), <i>The CMA Evolution Strategy: A Tutorial</i>,
+          arXiv:1604.00772 · Ha &amp; Schmidhuber (2018).
         </div>
       </div>
     </section>
@@ -4639,7 +4667,7 @@
       <div class="slide-content">
         <div class="section-title-block">
           <span class="eyebrow reveal"
-            >Scenario F · Parameter-Space Trajectory</span
+            >Parameter-Space Trajectory</span
           >
           <h2 class="title reveal">
             CMA-ES dives toward the peak — <em>then drifts past it.</em>
@@ -4694,7 +4722,7 @@
               </ul>
             </div>
 
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               PC1 explains <b>57.7%</b> of parameter variance · trajectory is
               curved (CMA-ES ≠ gradient descent) · best controller is
               mid-training, <b>not</b> at the end.
@@ -4702,9 +4730,13 @@
           </div>
         </div>
 
-        <div class="takeaway reveal">
+        <!-- <div class="takeaway reveal">
           Training is non-trivial;
           <b>visualisation makes the invisible process visible.</b>
+        </div> -->
+
+        <div class="cite reveal">
+          Hansen (2016), <i>CMA-ES Tutorial</i>, arXiv:1604.00772.
         </div>
       </div>
     </section>
@@ -4726,7 +4758,7 @@
       <div class="slide-content">
         <div class="section-title-block">
           <span class="eyebrow reveal"
-            >Scenario C · Imagination Faithfulness</span
+            >Imagination Faithfulness</span
           >
           <h2 class="title reveal">
             How long does the dream <em>stay faithful?</em>
@@ -4749,8 +4781,8 @@
             class="reveal stagger"
             style="display: flex; flex-direction: column; gap: 0.55rem"
           >
-            <p style="font-size: var(--small-size); line-height: 1.55">
-              Honest evaluation. <b>MSE</b> rises with horizon — autoregression
+            <p style="font-size: var(--medium-size); line-height: 1.55">
+              <b>MSE</b> rises with horizon — autoregression
               compounds pixel errors. <b>SSIM</b> drops from 0.68 to 0.45 by t =
               49 — structural similarity also degrades.
               <b style="color: var(--accent-amber)">τ = 0.5</b> (balanced
@@ -4814,10 +4846,10 @@
           </div>
         </div>
 
-        <div class="takeaway reveal">
+        <!-- <div class="takeaway reveal">
           Reliable horizon ≈ <b>30 steps</b> — matches CMA-ES rollout config
           (50-step total).
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -4961,7 +4993,7 @@
             <p
               class="dim"
               style="
-                font-size: var(--small-size);
+                font-size: var(--medium-size);
                 border-left: 2px solid var(--accent-amber);
                 padding-left: 0.7rem;
               "
@@ -4975,9 +5007,15 @@
           </div>
         </div>
 
-        <div class="takeaway reveal">
+        <!-- <div class="takeaway reveal">
           The bar to clear: <b>minimise collisions</b> while staying
           <b>decentralized</b>.
+        </div> -->
+
+        <div class="cite reveal">
+          Sharon, Stern, Felner &amp; Sturtevant (2015), <i>CBS</i>,
+          Artificial Intelligence 219 ·
+          Merrick &amp; Wojtkiewicz (2024), <i>RAWSim-O</i>.
         </div>
       </div>
     </section>
@@ -5080,7 +5118,7 @@
               <span class="panel-tab">In-dream summary (current)</span>
               <ul
                 class="dot-list"
-                style="font-size: var(--small-size); margin-top: 0.2rem"
+                style="font-size: var(--medium-size); margin-top: 0.2rem"
               >
                 <li>Trained on AgentAStar baseline data.</li>
                 <li>
@@ -5097,12 +5135,17 @@
             <p
               class="dim"
               style="
-                font-size: var(--small-size);
+                font-size: var(--medium-size);
                 border-left: 2px solid var(--accent-amber);
                 padding-left: 0.7rem;
                 font-style: italic;
               "
           </div>
+        </div>
+
+        <div class="cite reveal">
+          Schulman et al. (2017), <i>PPO</i>, arXiv:1707.06347 ·
+          Hafner et al. (2023), <i>DreamerV3</i>, arXiv:2301.04104.
         </div>
       </div>
     </section>
@@ -5143,7 +5186,7 @@
             <h3 style="color: var(--text-strong); margin-bottom: 0.35rem">
               Hyperparameter sweep
             </h3>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li><b>VAE:</b> β-KL weight; latent dim ∈ {32, 64, 128, 224}.</li>
               <li><b>MDN-RNN:</b> GMM components ∈ {5, 7, 10}; hidden size.</li>
               <li><b>CMA-ES:</b> σ initial, population, dream horizon.</li>
@@ -5158,7 +5201,7 @@
             <h3 style="color: var(--text-strong); margin-bottom: 0.35rem">
               Larger training set
             </h3>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>Current: 100 ep (640 K transitions).</li>
               <li><b>Target: 100+ episodes</b> for broader WM coverage.</li>
               <li>Diversify: jenkinsinstance2, jenkinsinstance3.</li>
@@ -5167,10 +5210,10 @@
           </div>
         </div>
 
-        <div class="takeaway reveal">
+        <!-- <div class="takeaway reveal">
           Deploy bridge to RAWSim-O is <b>built</b>; remaining tasks are
           <b>mostly parallelizable</b> tuning + data-scaling work.
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -5192,7 +5235,7 @@
       <div class="slide-content">
         <div class="section-title-block">
           <span class="eyebrow reveal">Take-aways</span>
-          <h2 class="title reveal">In <em>three</em> sentences.</h2>
+          <h2 class="title reveal">Conclusion</h2>
         </div>
 
         <div class="conclusion">
@@ -5207,9 +5250,7 @@
             </p>
             <p>
               With <b>3,531</b> controller parameters and
-              <b>zero</b> real-environment training steps, we have a
-              <b>decentralized</b> agent ready for real-environment
-              benchmarking.
+              <b>zero</b> real-environment training steps
             </p>
 
             <div class="conclusion-caption reveal">
@@ -5258,7 +5299,7 @@
             margin-top: 0.4rem;
           "
         >
-          <ul class="dot-list" style="font-size: var(--small-size)">
+          <ul class="dot-list" style="font-size: var(--medium-size)">
             <li>
               Ha, D., &amp; Schmidhuber, J. (2018). <b>World Models</b>.
               <i>NeurIPS</i>. arXiv:1803.10122.
@@ -5288,7 +5329,7 @@
               >. <i>ICLR</i>.
             </li>
           </ul>
-          <ul class="dot-list" style="font-size: var(--small-size)">
+          <ul class="dot-list" style="font-size: var(--medium-size)">
             <li>
               Hafner, D., et&nbsp;al. (2021).
               <b>Mastering Atari with Discrete World Models (DreamerV2)</b>.
@@ -5327,6 +5368,64 @@
           Foundations: <b>Ha &amp; Schmidhuber 2018</b> (V·M·C) · <b>VAE</b> ·
           <b>MDN</b> · <b>CMA-ES</b>; lineage extends to
           <b>Dreamer&nbsp;V1–V3</b>.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+     SLIDE — THANK YOU
+     ============================================================ -->
+    <section
+      class="slide title-slide"
+      data-section="09"
+      data-section-label="Thank You"
+    >
+      <div class="title-bg">
+        <img src="assets/gt_vs_dream.gif" alt="" />
+      </div>
+      <div class="title-frame">
+        <div class="title-top reveal-blur">
+          <div class="brand-logos">
+            <img
+              src="assets/ntust-logo.png"
+              alt="National Taiwan University of Science and Technology"
+              class="brand-logo brand-logo--ntust"
+            />
+            <span class="brand-divider"></span>
+            <img
+              src="assets/citi-lab-logo.png"
+              alt="CITI Lab"
+              class="brand-logo brand-logo--citi"
+            />
+            <span class="brand-text">
+              <span>NTUST</span>
+              <span class="lab-line">CITI Lab</span>
+            </span>
+          </div>
+          <div>TEEP Progress Update · 2026</div>
+        </div>
+
+        <div class="title-center">
+          <span class="eyebrow reveal">End of Presentation</span>
+          <h1 class="hero reveal">
+            Thank&nbsp;<em>You</em>.
+          </h1>
+          <p class="subtitle reveal">
+            Questions, comments, and counter-examples are all welcome.
+          </p>
+          <div class="title-keywords reveal stagger">
+            <span class="pill pill--amber">Q &amp; A</span>
+            <span class="pill pill--teal">Discussion</span>
+            <span class="pill pill--violet">Feedback</span>
+          </div>
+        </div>
+
+        <div class="title-bottom reveal">
+          <div class="title-meta">
+            <span><strong>AI Intern · Lucky Santoso</strong></span>
+            <span>Advisor · Prof. Shou Yan Chou | Fadhil Rasyidin</span>
+          </div>
+          <div class="footer-right"></div>
         </div>
       </div>
     </section>
@@ -5373,7 +5472,7 @@
               floor. Anything above that in dream rollouts is the dynamics model
               contributing error, not the encoder.
             </p>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>Top row in keyframes panel: <b>ground truth</b>.</li>
               <li>Bottom row: <b>VAE reconstruction</b>.</li>
               <li>
@@ -5385,6 +5484,10 @@
               <span class="pill pill--amber">96 × 96 × 6 → 64</span>
             </div>
           </div>
+        </div>
+
+        <div class="cite reveal">
+          Kingma &amp; Welling (2014), <i>VAE</i>, arXiv:1312.6114.
         </div>
       </div>
     </section>
@@ -5419,7 +5522,7 @@
         >
           <div class="panel">
             <span class="panel-tab">Validation protocol</span>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>Hold out 20% of episodes.</li>
               <li>
                 Compute log p(z<sub>t+1</sub> | z<sub>t</sub>, a<sub>t</sub>,
@@ -5430,7 +5533,7 @@
           </div>
           <div class="panel">
             <span class="panel-tab">Findings</span>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>Most dims log-likelihood &gt; <b>−2.0</b>.</li>
               <li>
                 Two dims with bimodal distribution show the largest deviation —
@@ -5444,6 +5547,11 @@
         <div class="takeaway reveal">
           Per-dim diagnostics tell us <b>where</b> the model fails — and that
           5-Gaussian capacity is well-utilised.
+        </div>
+
+        <div class="cite reveal">
+          Bishop (1994), <i>Mixture Density Networks</i>, NCRG/94/004 ·
+          Hochreiter &amp; Schmidhuber (1997), <i>LSTM</i>.
         </div>
       </div>
     </section>
@@ -5485,7 +5593,7 @@
             <h3 style="color: var(--accent-coral); margin-bottom: 0.3rem">
               Input: (96, 96, 3)
             </h3>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>Bot stationary <i>looks identical</i> to bot moving.</li>
               <li>VAE cannot encode motion in z.</li>
               <li>Dynamics model collapses on motion-dependent transitions.</li>
@@ -5499,7 +5607,7 @@
             <h3 style="color: var(--accent-teal); margin-bottom: 0.3rem">
               Input: (96, 96, 6)
             </h3>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>Velocity inferable from a single forward pass.</li>
               <li>z encodes <b>both</b> position and motion.</li>
               <li>Dynamics model handles direction transitions cleanly.</li>
@@ -5552,7 +5660,7 @@
                 <td>VAE training</td>
                 <td class="num" style="text-align: right">~2 h</td>
                 <td>1× consumer GPU</td>
-                <td>20 epochs · MSE + KL</td>
+                <td>100 epochs · MSE + KL</td>
               </tr>
               <tr>
                 <td>MDN-RNN training</td>
@@ -5596,14 +5704,14 @@
         >
           <div class="panel" style="padding: 0.6rem 0.85rem">
             <span class="panel-tab">Why faster overall</span>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               Dream rollouts <b>parallelize trivially</b> — no shared simulator
               state. We saturate CPU cores rather than wait on a single env.
             </p>
           </div>
           <div class="panel" style="padding: 0.6rem 0.85rem">
             <span class="panel-tab">Why scaling is fine</span>
-            <p class="dim" style="font-size: var(--small-size)">
+            <p class="dim" style="font-size: var(--medium-size)">
               More episodes = more V/M data, but C training cost is independent.
               The expensive piece is the data collection — and that runs on
               existing simulator infra.
@@ -5656,7 +5764,7 @@
               sky + a generic corridor floor. Fine-grained pod and bot details
               disappear.
             </p>
-            <ul class="dot-list" style="font-size: var(--small-size)">
+            <ul class="dot-list" style="font-size: var(--medium-size)">
               <li>
                 <b>Why:</b> autoregression compounds; trained for 1-step
                 prediction.
@@ -5673,7 +5781,7 @@
             <p
               class="dim"
               style="
-                font-size: var(--small-size);
+                font-size: var(--medium-size);
                 border-left: 2px solid var(--accent-amber);
                 padding-left: 0.7rem;
                 font-style: italic;
@@ -5748,7 +5856,7 @@
 
         <ul
           class="dot-list reveal stagger"
-          style="font-size: var(--small-size); max-width: 60ch"
+          style="font-size: var(--medium-size); max-width: 60ch"
         >
           <li>
             Our action space contains <b>discrete argmax</b> heads (direction
@@ -5763,15 +5871,16 @@
             <b>cumulative-reward signal</b> per rollout, not per-step credit
             assignment.
           </li>
-          <li>
-            3,531 parameters is a tiny enough search space that ES converges in
-            ~290 generations.
-          </li>
         </ul>
 
         <div class="takeaway reveal">
           CMA-ES is the right tool for this <b>combination</b> of constraints —
           discrete actions, sparse reward, offline-only.
+        </div>
+
+        <div class="cite reveal">
+          Hansen (2016), <i>CMA-ES Tutorial</i>, arXiv:1604.00772 ·
+          Schulman et al. (2017), <i>PPO</i>, arXiv:1707.06347.
         </div>
       </div>
     </section>
